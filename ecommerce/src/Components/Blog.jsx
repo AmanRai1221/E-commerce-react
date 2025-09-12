@@ -84,7 +84,7 @@ export default function Blog() {
         </div>
         <div className="form">
             <input type="text" placeholder="Enter Your Email"/>
-            <button class="normal">Sign Up</button>
+            <button className="normal">Sign Up</button>
         </div>
       </section>
 

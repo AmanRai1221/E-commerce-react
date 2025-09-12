@@ -14,69 +14,30 @@ export const CartProvider = ({ children }) => {
   };
 
   const addToCart = async (product) => {
-    const { API } = await import("../utils/api");
-    // If not authenticated, keep a guest cart locally
-    if (!API.token) {
-      const existing = items.find((i) => i.id === product.id);
-      if (existing) {
-        const updated = items.map((i) =>
-          i.id === product.id ? { ...i, qty: i.qty + 1 } : i
-        );
-        save(updated);
-      } else {
-        save([...items, { ...product, qty: 1 }]);
-      }
-      return;
-    }
-    const itemId = await API.resolveItemIdByProduct(product);
-    if (!itemId) {
-      // Fallback to local behavior if not resolvable
-      const existing = items.find((i) => i.id === product.id);
-      if (existing) {
-        const updated = items.map((i) =>
-          i.id === product.id ? { ...i, qty: i.qty + 1 } : i
-        );
-        save(updated);
-      } else {
-        save([...items, { ...product, qty: 1 }]);
-      }
-      return;
-    }
+    console.log('Adding product to cart:', product);
+    console.log('Current cart items:', items);
+    
+    // Simplified local-first approach
     try {
-      const res = await API.addToCart(itemId, 1);
-      // Mirror backend cart locally by mapping to display shape using product info if available
-      // We only store minimal: use product image/name if matches
-      const backendItems = res.items || [];
-      const mapped = backendItems.map((c) => {
-        // Always use backend itemId for id to keep API ops working
-        if (product && itemId === c.itemId) {
-          return {
-            id: c.itemId,
-            name: product.name || "",
-            price: product.price || 0,
-            image: product.image || "",
-            qty: c.qty,
-          };
-        }
-        const found = items.find(
-          (i) => i.id === c.itemId || i.id === product.id
-        );
-        return found
-          ? { ...found, id: c.itemId, qty: c.qty }
-          : { id: c.itemId, name: "Item", price: 0, image: "", qty: c.qty };
-      });
-      save(mapped);
-    } catch (e) {
-      // Fallback to local-only cart if backend errors
       const existing = items.find((i) => i.id === product.id);
       if (existing) {
+        console.log('Product exists, updating quantity');
         const updated = items.map((i) =>
           i.id === product.id ? { ...i, qty: i.qty + 1 } : i
         );
         save(updated);
+        console.log('Updated cart:', updated);
       } else {
-        save([...items, { ...product, qty: 1 }]);
+        console.log('New product, adding to cart');
+        const newCart = [...items, { ...product, qty: 1 }];
+        save(newCart);
+        console.log('New cart:', newCart);
       }
+      
+      // Optional: Try to sync with backend if needed
+      // This can be implemented later without breaking local functionality
+    } catch (e) {
+      console.error('Error adding to cart:', e);
     }
   };
 

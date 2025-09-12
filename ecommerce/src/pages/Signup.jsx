@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import "./Login-Signup.css";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -87,84 +88,162 @@ const Signup = () => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-form">
-        <h2>Create Your Account</h2>
+    <div className="login-signup">
+      <div className="login-signup-container fade-in">
+        {/* Welcome Section */}
+        <div className="welcome-section">
+          <div className="welcome-content">
+            <div className="welcome-icon">🛍️</div>
+            <h1 className="welcome-title">Join Us Today!</h1>
+            <p className="welcome-subtitle">
+              Create your account and start shopping with exclusive deals and
+              personalized recommendations.
+            </p>
+          </div>
+        </div>
 
-        {errors.general && (
-          <div className="error-message">{errors.general}</div>
-        )}
-
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Full Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className={errors.name ? "error" : ""}
-              placeholder="Enter your full name"
-            />
-            {errors.name && <span className="error">{errors.name}</span>}
+        {/* Form Section */}
+        <div className="form-section">
+          <div className="form-header">
+            <h2 className="form-title">Create Account</h2>
+            <p className="form-subtitle">
+              Fill in your details to get started
+            </p>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className={errors.email ? "error" : ""}
-              placeholder="Enter your email"
-            />
-            {errors.email && <span className="error">{errors.email}</span>}
+          {/* Error Message */}
+          {errors.general && (
+            <div className="error-message">{errors.general}</div>
+          )}
+
+          {/* Form */}
+          <form className="auth-form" onSubmit={handleSubmit}>
+            {/* Name Field */}
+            <div className="form-group">
+              <label htmlFor="name" className="form-label">
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className={`form-input ${
+                  errors.name ? "invalid" : formData.name ? "valid" : ""
+                }`}
+                placeholder="Enter your full name"
+              />
+              {errors.name && (
+                <div className="error-message">{errors.name}</div>
+              )}
+            </div>
+
+            {/* Email Field */}
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={`form-input ${
+                  errors.email ? "invalid" : formData.email ? "valid" : ""
+                }`}
+                placeholder="Enter your email address"
+              />
+              {errors.email && (
+                <div className="error-message">{errors.email}</div>
+              )}
+            </div>
+
+            {/* Password Field */}
+            <div className="form-group password-group">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={`form-input ${
+                  errors.password ? "invalid" : formData.password ? "valid" : ""
+                }`}
+                placeholder="Enter your password"
+              />
+              {errors.password && (
+                <div className="error-message">{errors.password}</div>
+              )}
+            </div>
+
+            {/* Confirm Password Field */}
+            <div className="form-group password-group">
+              <label htmlFor="confirmPassword" className="form-label">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className={`form-input ${
+                  errors.confirmPassword
+                    ? "invalid"
+                    : formData.confirmPassword
+                    ? "valid"
+                    : ""
+                }`}
+                placeholder="Confirm your password"
+              />
+              {errors.confirmPassword && (
+                <div className="error-message">{errors.confirmPassword}</div>
+              )}
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className={`submit-btn ${loading ? "loading" : ""}`}
+              disabled={loading}
+            >
+              {loading && <span className="spinner"></span>}
+              {loading ? "Creating Account..." : "Create Account"}
+            </button>
+          </form>
+
+          {/* Divider */}
+          <div className="divider">
+            <span>or continue with</span>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className={errors.password ? "error" : ""}
-              placeholder="Enter your password"
-            />
-            {errors.password && (
-              <span className="error">{errors.password}</span>
-            )}
+          {/* Social Login */}
+          <div className="social-login">
+            <button type="button" className="social-btn google">
+              <span>📧</span> Google
+            </button>
+            <button type="button" className="social-btn facebook">
+              <span>📘</span> Facebook
+            </button>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className={errors.confirmPassword ? "error" : ""}
-              placeholder="Confirm your password"
-            />
-            {errors.confirmPassword && (
-              <span className="error">{errors.confirmPassword}</span>
-            )}
+          {/* Terms */}
+          <div className="terms">
+            By creating an account, you agree to our{" "}
+            <Link to="/terms">Terms of Service</Link> and{" "}
+            <Link to="/privacy">Privacy Policy</Link>
           </div>
 
-          <button type="submit" className="auth-button" disabled={loading}>
-            {loading ? "Creating Account..." : "Sign Up"}
-          </button>
-        </form>
-
-        <div className="auth-links">
-          <p>
-            Already have an account? <Link to="/login">Login here</Link>
-          </p>
+          {/* Auth Links */}
+          <div className="terms" style={{ marginTop: "15px" }}>
+            Already have an account?{" "}
+            <Link to="/login">Login here</Link>
+          </div>
         </div>
       </div>
     </div>

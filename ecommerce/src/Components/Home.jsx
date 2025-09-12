@@ -20,13 +20,18 @@ export default function Home() {
       const titleEl =
         pro.querySelector(".product-title") || pro.querySelector("h5");
       const priceEl = pro.querySelector(".price") || pro.querySelector("h4");
-      const image = imgEl?.getAttribute("src") || "";
+      const rawSrc = imgEl?.getAttribute("src") || "";
+      // Ensure image path is correct
+      const image = rawSrc.startsWith("/") ? rawSrc : "/" + rawSrc;
       const name = titleEl?.textContent?.trim() || "Product";
       const priceText = priceEl?.textContent || "0";
+      // Better price extraction - remove 'Rs.' and commas
       const priceNum = Number(priceText.replace(/[^0-9]/g, "")) || 0;
-      const id = `${name}-${image}`;
+      const id = `${name}-${priceNum}-${Date.now()}`; // Make ID more unique
+      
+      console.log('Home - Extracted product data:', { id, name, price: priceNum, image });
       addToCart({ id, name, price: priceNum, image });
-      alert("Item added to cart");
+      alert(`"${name}" added to cart for Rs. ${priceNum}`);
     };
     const el = rootRef.current;
     el?.addEventListener("click", handler);

@@ -4,17 +4,25 @@ import { useCart } from "../contexts/CartContext.jsx";
 
 export default function Cart() {
   const { items, removeFromCart, updateQty, total, clearCart } = useCart();
+  
+  console.log('Cart component - items:', items);
+  console.log('Cart component - total:', total);
 
   return (
     <div>
       <section id="page-header" className="about-header">
-        <h2>#Cart Items</h2>
+        <h2>#Cart Items ({items.length})</h2>
         <p>LEAVE A MESSAGE, We love hear from you</p>
       </section>
 
       <section id="cart" className="section-p1">
         {items.length === 0 ? (
-          <p>Your cart is empty.</p>
+          <div>
+            <p>Your cart is empty.</p>
+            <p style={{ fontSize: '0.9rem', color: '#666', marginTop: '10px' }}>
+              Add some products from the <a href="/#/shop" style={{ color: '#007bff' }}>Shop</a> or <a href="/#/" style={{ color: '#007bff' }}>Home</a> page.
+            </p>
+          </div>
         ) : (
           <>
             <table width="100%">
@@ -42,10 +50,22 @@ export default function Cart() {
                       </button>
                     </td>
                     <td>
-                      <img src={item.image} alt={item.name} />
+                      <img 
+                        src={item.image || '/img/placeholder.png'} 
+                        alt={item.name} 
+                        style={{ 
+                          width: '60px', 
+                          height: '60px', 
+                          objectFit: 'cover',
+                          borderRadius: '4px'
+                        }}
+                        onError={(e) => {
+                          e.target.src = '/img/placeholder.png';
+                        }}
+                      />
                     </td>
-                    <td>{item.name}</td>
-                    <td>Rs. {item.price}</td>
+                    <td style={{ fontWeight: '500' }}>{item.name}</td>
+                    <td style={{ color: '#28a745', fontWeight: '600' }}>Rs. {item.price?.toLocaleString() || 0}</td>
                     <td>
                       <input
                         type="number"
@@ -56,7 +76,9 @@ export default function Cart() {
                         }
                       />
                     </td>
-                    <td>Rs. {item.price * item.qty}</td>
+                    <td style={{ color: '#dc3545', fontWeight: '600' }}>
+                      Rs. {((item.price || 0) * (item.qty || 1)).toLocaleString()}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -68,7 +90,9 @@ export default function Cart() {
                   >
                     Total:
                   </td>
-                  <td>Rs. {total}</td>
+                  <td style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#007bff' }}>
+                    Rs. {total?.toLocaleString() || 0}
+                  </td>
                 </tr>
               </tfoot>
             </table>

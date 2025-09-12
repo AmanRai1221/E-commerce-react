@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div id="header">
-      <a href="#">
+      {/* Use Link for SPA navigation */}
+      <Link to="/">
         <img src="/img/Amazon logo.png" width="200px" />
-      </a>
+      </Link>
       <div>
-        <ul id="navbar" >
+        <ul id="navbar">
           <li>
             <h3>
               <Link to="/">Home</Link>
@@ -17,22 +18,27 @@ const Navbar = () => {
           </li>
           <li>
             <h3>
-              <Link to="/Shop">Shop</Link>
+              <Link to="/shop">Shop</Link>
             </h3>
           </li>
           <li>
             <h3>
-              <Link to="/Blog">Blog</Link>
+              <Link to="/blog">Blog</Link>
             </h3>
           </li>
           <li>
             <h3>
-              <Link to="/About">About</Link>
+              <Link to="/about">About</Link>
             </h3>
           </li>
           <li>
             <h3>
-              <Link to="/Contact">Contact</Link>
+              <Link to="/contact">Contact</Link>
+            </h3>
+          </li>
+          <li>
+            <h3>
+              <Link to="/login">Login</Link>
             </h3>
           </li>
           <li>

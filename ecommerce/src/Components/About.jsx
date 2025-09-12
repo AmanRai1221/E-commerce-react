@@ -40,44 +40,44 @@ export default function About() {
         </div>
       </section>
 
-      <section id="feature" class="section-p1">
-        <div class="fe-box">
+      <section id="feature" className="section-p1">
+        <div className="fe-box">
           <img src="img/f1.png" alt="" />
           <h6>Free Shipping</h6>
         </div>
-        <div class="fe-box">
+        <div className="fe-box">
           <img src="img/f2.png" alt="" />
           <h6>Online Order</h6>
         </div>
-        <div class="fe-box">
+        <div className="fe-box">
           <img src="img/f3.png" alt="" />
           <h6>Save Money</h6>
         </div>
-        <div class="fe-box">
+        <div className="fe-box">
           <img src="img/f4.png" alt="" />
           <h6>Promotions</h6>
         </div>
-        <div class="fe-box">
+        <div className="fe-box">
           <img src="img/f5.png" alt="" />
           <h6>Happy Sell</h6>
         </div>
-        <div class="fe-box">
+        <div className="fe-box">
           <img src="img/f6.png" alt="" />
           <h6>24/7 Support</h6>
         </div>
       </section>
 
-      <section id="newsletter" class="section-p1 section-m1">
-        <div class="newstext">
+      <section id="newsletter" className="section-p1 section-m1">
+        <div className="newstext">
           <h4>Sign Up For Newsletters</h4>
           <p>
             Get E-mail updates about our lettest shop and{" "}
             <span>special offers</span>
           </p>
         </div>
-        <div class="form">
+        <div className="form">
           <input type="text" placeholder="Enter Your Email" />
-          <button class="normal">Sign Up</button>
+          <button className="normal">Sign Up</button>
         </div>
       </section>
     </div>

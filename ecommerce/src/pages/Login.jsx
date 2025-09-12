@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import "./Login-Signup.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -68,54 +69,117 @@ const Login = () => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-form">
-        <h2>Login to Your Account</h2>
+    <div className="login-signup">
+      <div className="login-signup-container fade-in">
+        {/* Welcome Section */}
+        <div className="welcome-section">
+          <div className="welcome-content">
+            <div className="welcome-icon">🛍️</div>
+            <h1 className="welcome-title">Welcome Back!</h1>
+            <p className="welcome-subtitle">
+              Sign in to your account and continue your shopping journey with us.
+            </p>
+          </div>
+        </div>
 
-        {errors.general && (
-          <div className="error-message">{errors.general}</div>
-        )}
-
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className={errors.email ? "error" : ""}
-              placeholder="Enter your email"
-            />
-            {errors.email && <span className="error">{errors.email}</span>}
+        {/* Form Section */}
+        <div className="form-section">
+          <div className="form-header">
+            <h2 className="form-title">Sign In</h2>
+            <p className="form-subtitle">Enter your credentials to continue</p>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className={errors.password ? "error" : ""}
-              placeholder="Enter your password"
-            />
-            {errors.password && (
-              <span className="error">{errors.password}</span>
-            )}
+          {/* Error Message */}
+          {errors.general && (
+            <div className="error-message">{errors.general}</div>
+          )}
+
+          {/* Form */}
+          <form className="auth-form" onSubmit={handleSubmit}>
+            {/* Email Field */}
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={`form-input ${
+                  errors.email ? "invalid" : formData.email ? "valid" : ""
+                }`}
+                placeholder="Enter your email address"
+              />
+              {errors.email && (
+                <div className="error-message">{errors.email}</div>
+              )}
+            </div>
+
+            {/* Password Field */}
+            <div className="form-group password-group">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={`form-input ${
+                  errors.password ? "invalid" : formData.password ? "valid" : ""
+                }`}
+                placeholder="Enter your password"
+              />
+              {errors.password && (
+                <div className="error-message">{errors.password}</div>
+              )}
+            </div>
+
+            {/* Form Options */}
+            <div className="form-options">
+              <div className="checkbox-group">
+                <input type="checkbox" id="rememberMe" name="rememberMe" />
+                <label htmlFor="rememberMe">Remember me</label>
+              </div>
+              <Link to="/forgot-password" className="forgot-password">
+                Forgot Password?
+              </Link>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className={`submit-btn ${loading ? "loading" : ""}`}
+              disabled={loading}
+            >
+              {loading && <span className="spinner"></span>}
+              {loading ? "Signing In..." : "Sign In"}
+            </button>
+          </form>
+
+          {/* Divider */}
+          <div className="divider">
+            <span>or continue with</span>
           </div>
 
-          <button type="submit" className="auth-button" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </form>
+          {/* Social Login */}
+          <div className="social-login">
+            <button type="button" className="social-btn google">
+              <span>📧</span> Google
+            </button>
+            <button type="button" className="social-btn facebook">
+              <span>📘</span> Facebook
+            </button>
+          </div>
 
-        <div className="auth-links">
-          <p>
-            Don't have an account? <Link to="/signup">Sign up here</Link>
-          </p>
+          {/* Auth Links */}
+          <div className="terms">
+            Don't have an account?{" "}
+            <Link to="/signup">Sign up here</Link>
+          </div>
         </div>
       </div>
     </div>
