@@ -30,7 +30,9 @@ const PORT = process.env.PORT || 4000;
 
 async function start() {
     const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ecommerce';
-    await mongoose.connect(mongoUri, { dbName: process.env.MONGO_DB || undefined });
+    // Prefer DB name in the URI. Keep dbName only if not present in URI.
+    const connectOptions = { serverSelectionTimeoutMS: 15000 };
+    await mongoose.connect(mongoUri, connectOptions);
     await seedItems();
     app.listen(PORT, () => {
         console.log(`API running on port ${PORT}`);

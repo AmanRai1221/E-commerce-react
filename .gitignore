@@ -1,0 +1,15 @@
+# Node / JS
+node_modules/
+*.log
+
+# dotenv
+.env
+backend/.env
+
+# build outputs
+/dist
+build/
+
+# OS
+.DS_Store
+Thumbs.db
