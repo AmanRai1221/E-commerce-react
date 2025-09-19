@@ -1,8 +1,17 @@
 import React from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { currentUser, logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
+
   return (
     <div id="header">
       {/* Use Link for SPA navigation */}
@@ -36,11 +45,7 @@ const Navbar = () => {
               <Link to="/contact">Contact</Link>
             </h3>
           </li>
-          <li>
-            <h3>
-              <Link to="/login">Login</Link>
-            </h3>
-          </li>
+
           <li>
             <h3>
               <Link to="/cart">
@@ -48,6 +53,38 @@ const Navbar = () => {
               </Link>
             </h3>
           </li>
+
+          {currentUser ? (
+            <>
+              <li>
+                <h3 style={{ marginRight: 5 }}>
+                  <span className="fs-4">{currentUser.name}</span>
+                </h3>
+              </li>
+              <li>
+                <h3>
+                  <button
+                    className="fs-4 fw-semibold"
+                    onClick={handleLogout}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "inherit",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Logout
+                  </button>
+                </h3>
+              </li>
+            </>
+          ) : (
+            <li>
+              <h3>
+                <Link to="/login">Login</Link>
+              </h3>
+            </li>
+          )}
         </ul>
       </div>
 

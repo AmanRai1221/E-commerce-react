@@ -12,7 +12,7 @@ export default function Cart() {
     <div>
       <section id="page-header" className="about-header">
         <h2>#Cart Items ({items.length})</h2>
-        <p>LEAVE A MESSAGE, We love hear from you</p>
+        <p>All Your Cart Items are here!</p>
       </section>
 
       <section id="cart" className="section-p1">
