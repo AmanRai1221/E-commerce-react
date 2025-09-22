@@ -5,7 +5,7 @@ export default function About() {
   return (
     <div>
       <section id="about-head" className="section-p1">
-        <img src="img/about/a6.jpg" alt="" />
+        <img src="/img/about/a6.jpg" alt="" />
         <div>
           <h2>Who We Are?</h2>
           <p>
@@ -36,33 +36,33 @@ export default function About() {
           Download Our <a href="#">App</a>
         </h1>
         <div className="video">
-          <video src="/img/about/1.mp4" autoplay muted loop></video>
+          <video src="/img/about/1.mp4" autoPlay muted loop></video>
         </div>
       </section>
 
       <section id="feature" className="section-p1">
         <div className="fe-box">
-          <img src="img/f1.png" alt="" />
+          <img src="/img/f1.png" alt="" />
           <h6>Free Shipping</h6>
         </div>
         <div className="fe-box">
-          <img src="img/f2.png" alt="" />
+          <img src="/img/f2.png" alt="" />
           <h6>Online Order</h6>
         </div>
         <div className="fe-box">
-          <img src="img/f3.png" alt="" />
+          <img src="/img/f3.png" alt="" />
           <h6>Save Money</h6>
         </div>
         <div className="fe-box">
-          <img src="img/f4.png" alt="" />
+          <img src="/img/f4.png" alt="" />
           <h6>Promotions</h6>
         </div>
         <div className="fe-box">
-          <img src="img/f5.png" alt="" />
+          <img src="/img/f5.png" alt="" />
           <h6>Happy Sell</h6>
         </div>
         <div className="fe-box">
-          <img src="img/f6.png" alt="" />
+          <img src="/img/f6.png" alt="" />
           <h6>24/7 Support</h6>
         </div>
       </section>
