@@ -1,4 +1,8 @@
 /* Contact Page */
+#page-header.contact-header {
+    background-image: url(img/about/banner.png);
+}
+
 #contact-details {
     display: flex;
     justify-content: space-between;

@@ -4,7 +4,7 @@ import "./Contact.css";
 export default function Contact() {
   return (
     <div>
-      <section id="page-header" className="about-header">
+      <section id="page-header" className="contact-header">
         <h2>#let's_talk</h2>
         <p>LEAVE A MESSAGE, We love hear from you</p>
       </section>
